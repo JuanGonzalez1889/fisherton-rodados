@@ -1,0 +1,201 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+}
+
+.swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+    margin: 0 4px !important;
+    color: #e0e0e0 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #d4ff9d !important;
+}
+
+.swiper-pagination {
+    bottom: -5px !important;
+    color: #e0e0e0 !important;
+}
+
+.swiper-button-next {
+    color: #e0e0e0 !important;
+}
+
+.swiper-button-prev {
+    color: #e0e0e0 !important;
+}
+
+/* Scroll Indicator Animation */
+.indicator {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
+    margin-top: 40px;
+    transform: rotate(45deg);
+}
+
+.indicator span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    animation: animate 1s linear infinite;
+}
+
+.indicator span:nth-child(1) {
+    top: -21px;
+    left: -21px;
+    animation-delay: 0s;
+}
+
+.indicator span:nth-child(2) {
+    top: -10.5px;
+    left: -10.5px;
+    animation-delay: 0.2s;
+}
+
+.indicator span:nth-child(3) {
+    top: 0;
+    left: 0;
+    animation-delay: 0.4s;
+}
+
+.indicator span:nth-child(4) {
+    top: 10.5px;
+    left: 10.5px;
+    animation-delay: 0.6s;
+}
+
+.indicator span:nth-child(5) {
+    top: 21px;
+    left: 21px;
+    animation-delay: 0.8s;
+}
+
+@keyframes animate {
+    0% {
+        border-color: #fff;
+        transform: translate(0, 0);
+    }
+
+    20% {
+        border-color: #fff;
+        transform: translate(10.5px, 10.5px);
+    }
+
+    20.1%,
+    100% {
+        border-color: #ffd64a;
+    }
+}
+
+/* Rainbow Border Effect for Cards */
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --opacity {
+    syntax: "<number>";
+    initial-value: 1;
+    inherits: false;
+}
+
+.feature-card {
+    --border-size: 3px;
+    position: relative;
+    border: var(--border-size) solid transparent;
+    transition: all 0.3s ease;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--border-size));
+    border-radius: inherit;
+    padding: var(--border-size);
+    background: conic-gradient(from var(--angle),
+            #ffd64a 0deg 90deg,
+            #1a1a1a 90deg 180deg,
+            #ffd64a 180deg 270deg,
+            #1a1a1a 270deg 360deg);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+
+/* Hero: blur suave al fondo (sin perder legibilidad) */
+.hero-img {
+    filter: blur(1.5px) saturate(1.05);
+    transform: scale(1.03);
+    transition: transform .6s ease, filter .6s ease;
+}
+
+@media (min-width: 768px) {
+    .hero-img {
+        filter: blur(2px) saturate(1.05);
+        transform: scale(1.04);
+    }
+}
+
+.info-bar-minimal {
+    margin-left: 32%;
+    background-color: #fef006;
+    width: 36%;
+    /* Amarillo de tu header */
+    color: #1a1a1a;
+    /* Texto oscuro para buen contraste */
+    text-align: center;
+    padding: 10px 0;
+    /* Un padding sutil */
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    /* Espacio antes del título 'Nuestros Vehículos' */
+}
+
+.info-bar-minimal span {
+    display: block;
+}
+
+.info-bar-minimal strong {
+    font-weight: 700;
+}
