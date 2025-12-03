@@ -68,3 +68,22 @@ Password: admin123
 infofishertonrodados@gmail.com
 Fisherton1234
 
+
+## BD PROD
+Nombre de la base de datos MySQL : fisherton
+Nombre de usuario MySQL: fisherton
+Contraseña: Fishertonrodados2025@
+
+u917554922_fisherton
+u917554922_fisherton	
+
+
+## USUARIO PROD PANEL ADMIN
+nombre: FISHERTON RODADOS
+
+mail: admin@fishertonrodados.com.ar
+
+contraseña: Admin123
+
+## SSH
+clave: Piru23194@

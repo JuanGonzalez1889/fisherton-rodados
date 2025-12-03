@@ -8,7 +8,8 @@
         class="relative min-h-[70vh] md:min-h-[78vh] flex items-center justify-center overflow-hidden rounded-none md:rounded-xl">
         <!-- Fondo + Overlay degradado -->
         <div class="absolute inset-0">
-            <img src="{{ asset('images/local.jpeg') }}" alt="Fisherton Rodados" class="w-full h-full object-cover hero-img" />
+            <img src="{{ asset('images/12.jpeg') }}" alt="Fisherton Rodados" class="w-full h-full object-cover hero-img" style="
+    height: 110%;"/>
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-black/45"></div>
         </div>
 

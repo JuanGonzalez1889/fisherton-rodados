@@ -108,7 +108,6 @@ class VehicleResource extends Resource
                                 ->acceptedFileTypes(['image/*'])
                                 ->extraInputAttributes([
                                     'accept' => 'image/*',
-                                    'capture' => 'environment',
                                 ])
                                 ->helperText('Solo una imagen puede ser principal. Al guardar, solo la última marcada quedará activa.')
                                 ->columnSpanFull()
