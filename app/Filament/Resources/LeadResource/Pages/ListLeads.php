@@ -10,10 +10,12 @@ class ListLeads extends ListRecords
 {
     protected static string $resource = LeadResource::class;
 
+    protected static ?string $breadcrumb = 'Listado';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Nuevo Cliente'),
         ];
     }
 }

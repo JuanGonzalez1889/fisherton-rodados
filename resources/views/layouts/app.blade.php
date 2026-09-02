@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
 
     <script>
         tailwind.config = {
@@ -34,6 +36,27 @@
             -webkit-font-smoothing: antialiased;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB79VVLNSL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-XB79VVLNSL');
+
+        
+        // Evento adicional con nombre de ruta (útil en reportes personalizados)
+        gtag('event', 'page_view', {
+            page_title: '{{ trim($__env->yieldContent('title') ?? 'Fisherton Rodados') }}',
+            page_location: '{{ url()->current() }}',
+            page_path: '{{ request()->path() }}',
+            route_name: '{{ Route::currentRouteName() }}'
+        });     
+    </script>
+
 </head>
 
 <body class="bg-white text-gray-900">

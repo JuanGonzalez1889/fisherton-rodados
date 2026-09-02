@@ -2,21 +2,21 @@
 
 namespace App\Providers;
 
+use BladeUI\Icons\Factory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        $this->callAfterResolving(Factory::class, function (Factory $factory) {
+            $factory->add('custom', [
+                'path'   => resource_path('svg'),
+                'prefix' => 'custom',
+            ]);
+        });
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         //

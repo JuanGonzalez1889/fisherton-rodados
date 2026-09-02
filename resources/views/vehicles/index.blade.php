@@ -129,7 +129,7 @@
                                 <h3 class="text-2xl font-bold mb-2">{{ $vehicle->brand }} {{ $vehicle->model }}</h3>
                                 <p class="text-gray-600 mb-4">{{ $vehicle->year }} • {{ $vehicle->kilometers }} km</p>
                                 <div class="flex items-center justify-between">
-                                    <span class="text-3xl font-bold text-primary">{{ $vehicle->formatted_price }}</span>
+                                    <span class="text-3xl font-bold text-dark">{{ $vehicle->formatted_price }}</span>
                                     <span class="text-dark font-medium">Ver más →</span>
                                 </div>
                             </div>

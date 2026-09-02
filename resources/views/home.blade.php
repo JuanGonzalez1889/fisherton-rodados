@@ -185,7 +185,7 @@
                                             {{ $vehicle->kilometers }} km</p>
                                         <div class="flex items-center justify-between">
                                             <span
-                                                class="text-3xl font-bold text-primary">{{ $vehicle->formatted_price }}</span>
+                                                class="text-3xl font-bold text-dark">{{ $vehicle->formatted_price }}</span>
                                             <span class="text-dark font-medium">Ver más →</span>
                                         </div>
                                     </div>
