@@ -8,6 +8,7 @@ use App\Models\Lead;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -386,13 +387,40 @@ class LeadResource extends Resource
                 Tables\Actions\DeleteAction::make()
                     ->visible(fn (): bool => auth()->user()->isAdmin()),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->visible(fn (): bool => auth()->user()->isAdmin()),
-                ]),
+            ->headerActions([
+                Tables\Actions\Action::make('eliminarVarios')
+                    ->label('Eliminar varios')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->visible(fn (): bool => auth()->user()->isAdmin())
+                    ->form([
+                        Forms\Components\Select::make('ids')
+                            ->label('Clientes a eliminar')
+                            ->multiple()
+                            ->searchable()
+                            ->required()
+                            ->options(fn (): array => Lead::query()
+                                ->orderByDesc('created_at')
+                                ->get()
+                                ->mapWithKeys(fn (Lead $lead): array => [
+                                    $lead->id => trim($lead->name . ' ' . $lead->apellido)
+                                        . ' — ' . (self::ESTADOS[$lead->status] ?? $lead->status),
+                                ])
+                                ->all()
+                            ),
+                    ])
+                    ->requiresConfirmation()
+                    ->modalHeading('Eliminar clientes seleccionados')
+                    ->modalSubmitActionLabel('Eliminar')
+                    ->action(function (array $data): void {
+                        $cantidad = Lead::whereIn('id', $data['ids'])->delete();
+                        Notification::make()
+                            ->title("{$cantidad} cliente(s) eliminado(s)")
+                            ->success()
+                            ->send();
+                    }),
             ])
-            // Desactivado: el checkbox de selección se desborda en el layout de tarjetas (contentGrid)
+            // Sin checkbox por tarjeta: rompe el layout de contentGrid. El borrado masivo se hace desde "Eliminar varios".
             ->selectable(false)
             ->defaultSort('created_at', 'desc');
     }
