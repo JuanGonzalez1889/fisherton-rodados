@@ -392,6 +392,8 @@ class LeadResource extends Resource
                         ->visible(fn (): bool => auth()->user()->isAdmin()),
                 ]),
             ])
+            // Desactivado: el checkbox de selección se desborda en el layout de tarjetas (contentGrid)
+            ->selectable(false)
             ->defaultSort('created_at', 'desc');
     }
 
