@@ -91,7 +91,7 @@ class TeamWidget extends Widget
         $data = [
             'name'  => $this->editName,
             'email' => $this->editEmail,
-            'role'  => $this->editRole,
+            'role'  => $user->id === auth()->id() ? $user->role : $this->editRole,
         ];
 
         if (filled($this->editPassword)) {

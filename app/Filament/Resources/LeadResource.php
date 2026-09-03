@@ -326,6 +326,9 @@ class LeadResource extends Resource
                             ->color('primary')
                             ->icon('heroicon-o-user')
                             ->placeholder('Sin asignar')
+                            ->limit(14)
+                            ->tooltip(fn (Lead $record): ?string => $record->vendedor?->name)
+                            ->grow(false)
                             ->alignEnd(),
                     ]),
 

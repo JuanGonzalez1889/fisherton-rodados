@@ -97,7 +97,7 @@
                         </div>
                     @endif
                 </div>
-                @if(auth()->user()->isAdmin() && !$isMe)
+                @if(auth()->user()->isAdmin())
                     <button class="fr-edit-btn" wire:click="editVendedor({{ $user->id }})" type="button" title="Editar">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:15px;height:15px;">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125"/>
@@ -129,14 +129,16 @@
                             <input wire:model="editPassword" type="password" placeholder="Dejar en blanco para no cambiarla" class="fr-input" />
                             @error('editPassword')<div class="fr-error">{{ $message }}</div>@enderror
                         </div>
-                        <div class="fr-field">
-                            <label>Rol</label>
-                            <select wire:model="editRole" class="fr-select" style="background-color:rgba(255,255,255,.05);">
-                                <option value="vendedor" style="background:#1e1e28;color:#f1f5f9;">Vendedor</option>
-                                <option value="admin"    style="background:#1e1e28;color:#f1f5f9;">Administrador</option>
-                            </select>
-                            @error('editRole')<div class="fr-error">{{ $message }}</div>@enderror
-                        </div>
+                        @if(!$isMe)
+                            <div class="fr-field">
+                                <label>Rol</label>
+                                <select wire:model="editRole" class="fr-select" style="background-color:rgba(255,255,255,.05);">
+                                    <option value="vendedor" style="background:#1e1e28;color:#f1f5f9;">Vendedor</option>
+                                    <option value="admin"    style="background:#1e1e28;color:#f1f5f9;">Administrador</option>
+                                </select>
+                                @error('editRole')<div class="fr-error">{{ $message }}</div>@enderror
+                            </div>
+                        @endif
                         <div class="fr-form-actions">
                             <button wire:click="cancelEdit" class="fr-cancel-btn" type="button">Cancelar</button>
                             <button wire:click="saveEdit" wire:loading.attr="disabled" class="fr-save-btn" type="button">
