@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Fisherton Rodados')
             ->brandLogo(asset('images/logo2.jpg'))
             ->brandLogoHeight('2.5rem')
+            ->favicon(asset('favicon.png'))
 
             ->colors([
                 'primary' => Color::Amber,

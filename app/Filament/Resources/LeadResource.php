@@ -373,9 +373,11 @@ class LeadResource extends Resource
                         $mensaje = urlencode(
                             "Hola {$cliente}, soy {$vendedor} de Fisherton Rodados. Te contacto por {$vehiculo}. ¿Seguís interesado?"
                         );
-                        $numero = ltrim($record->phone, '+');
+                        $numero = preg_replace('/\D+/', '', $record->phone);
                         if (!str_starts_with($numero, '549')) {
-                            $numero = '549' . ltrim($numero, '0');
+                            $numero = str_starts_with($numero, '54')
+                                ? '549' . substr($numero, 2)
+                                : '549' . ltrim($numero, '0');
                         }
                         $url = "https://wa.me/{$numero}?text={$mensaje}";
 
