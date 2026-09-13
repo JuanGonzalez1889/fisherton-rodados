@@ -365,14 +365,29 @@ class LeadResource extends Resource
                     ->action(function (Lead $record, $livewire): void {
                         $vendedor  = auth()->user()->name;
                         $cliente   = trim($record->name . ' ' . $record->apellido);
+
+                        // Vehículo en mayúsculas o texto genérico
                         $vehiculo = $record->vehicle
                             ? strtoupper("{$record->vehicle->brand} {$record->vehicle->model} {$record->vehicle->year}")
                             : ($record->otro_marca
                                 ? strtoupper("{$record->otro_marca} {$record->otro_modelo} {$record->otro_anio}")
                                 : 'un vehículo');
-                        $mensaje = urlencode(
-                            "Hola {$cliente}, soy {$vendedor} de Fisherton Rodados. Te contacto por {$vehiculo}. ¿Seguís interesado?"
-                        );
+
+                        // Saludo dinámico según la hora local
+                        $hora = (int) now()->format('H');
+                        if ($hora < 12) {
+                            $saludo = 'Buen día';
+                        } elseif ($hora < 21) {
+                            $saludo = 'Buenas tardes';
+                        } else {
+                            $saludo = 'Buenas noches';
+                        }
+
+                        // Mensaje personalizado (cambiado según lo solicitado)
+                        $mensajeTexto = "{$saludo}, {$vendedor} es mi nombre, ASESOR COMERCIAL DE FISHERTON RODADOS te dejo el catalogo actualizado de los vehículos que tenemos disponibles";
+
+                        $mensaje = urlencode($mensajeTexto);
+
                         $numero = preg_replace('/\D+/', '', $record->phone);
                         if (!str_starts_with($numero, '549')) {
                             $numero = str_starts_with($numero, '54')
