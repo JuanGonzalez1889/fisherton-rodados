@@ -10,6 +10,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -31,6 +32,10 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('images/logo2.jpg'))
             ->brandLogoHeight('2.5rem')
             ->favicon(asset('favicon.png'))
+            ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn (): \Illuminate\Contracts\View\View => view('filament.upload-diagnostics'),
+            )
 
             ->colors([
                 'primary' => Color::Amber,
