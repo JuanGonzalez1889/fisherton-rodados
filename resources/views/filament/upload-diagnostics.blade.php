@@ -16,7 +16,7 @@
                 return;
             }
 
-            fetch(@json(route('admin.upload-diagnostics')), {
+            fetch(@json(url('/admin/upload-diagnostics')), {
                 method: 'POST',
                 credentials: 'same-origin',
                 keepalive: true,
